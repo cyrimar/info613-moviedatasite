@@ -1,4 +1,18 @@
---INFO 613 DDL movie data web site
+/* Context: INFO 613 DDL movie data web site*/
+/* File Name: DDL Creation Script*/
+/* Date: May 14, 2009*/
+/* Overview: This script shall create the tables, with their columns and appropriate data types,
+primary and foreign keys, and any other constraints necessary. */
+
+SHUTDOWN ABORT;
+STARTUP MOUNT EXCLUSIVE RESTRICT; 
+DROP DATABASE;
+CREATE DATABASE orcl;
+
+/* Application will connect to the database via username='abc123', password='oracle_password'.*/
+/* Application cannot manipulate database structure. Instead, it can only perform select, insert operations on entities. */
+--GRANT SELECT,INSERT ON *.* TO 'abc123'@'oracle.cis.drexel.edu'
+--REVOKE DROP,CREATE,UPDATE,DELETE ON *.* FROM 'abc123'@'oracle.cis.drexel.edu'
 
 --Actor entity table
 CREATE TABLE actor (
@@ -28,14 +42,14 @@ CREATE TABLE plays (
 --Director entity table
 CREATE TABLE director (
 	director_id	numeric(10)		NOT NULL,
-	director	varchar2(100)	NOT NULL,
+	director_name varchar2(100)	NOT NULL,
 	CONSTRAINT director_pk PRIMARY KEY (director_id)
 );
 
 --Genre entity table
 CREATE TABLE genre (
 	genre_id	numeric(10)		NOT NULL,
-	genre		varchar2(100)	NOT NULL,
+	genre_name	varchar2(100)	NOT NULL,
 	CONSTRAINT genre_pk PRIMARY KEY (genre_id)
 );
 
