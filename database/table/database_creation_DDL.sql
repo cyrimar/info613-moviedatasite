@@ -4,11 +4,6 @@
 /* Overview: This script shall create the tables, with their columns and appropriate data types,
 primary and foreign keys, and any other constraints necessary. */
 
-SHUTDOWN ABORT;
-STARTUP MOUNT EXCLUSIVE RESTRICT; 
-DROP DATABASE;
-CREATE DATABASE orcl;
-
 /* Application will connect to the database via username='abc123', password='oracle_password'.*/
 /* Application cannot manipulate database structure. Instead, it can only perform select, insert operations on entities. */
 --GRANT SELECT,INSERT ON *.* TO 'abc123'@'oracle.cis.drexel.edu'
