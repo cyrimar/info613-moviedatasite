@@ -5,7 +5,7 @@
  * genres of all movies acted by an actor */ 
 
 CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByActor 
-(actorFName VARCHAR2,actorLName VARCHAR2)
+(actorFName IN VARCHAR2,actorLName IN VARCHAR2)
 IS
 sql_st VARCHAR2(200);
 fname VARCHAR2(100) := actorFName;
