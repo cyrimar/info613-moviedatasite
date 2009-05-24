@@ -4,9 +4,9 @@
 /* Overview: This stored proc shall retrieve titles and 
  * genres of all movies acted by an actor */ 
 
-CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByActor (actorFName IN VARCHAR2, 
-actorLName IN VARCHAR2)
-IS 
+CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByActor (actorFName VARCHAR2, 
+actorLName VARCHAR2)
+AS 
 BEGIN
     EXECUTE IMMEDIATE 
 	'SELECT 
@@ -19,6 +19,6 @@ BEGIN
     MG.GENRE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
     A.FIRST_NAME =' || actorFName ' AND 
-    A.LAST_NAME =' || actorLName '';
+    A.LAST_NAME =' || actorLName;
 END; 
 /
