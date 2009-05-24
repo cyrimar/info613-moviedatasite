@@ -73,3 +73,9 @@ CREATE TABLE sequence (
 	next_id		numeric(10)		NOT NULL,
 	CONSTRAINT sequence_pk PRIMARY KEY (table_name)
 );
+
+--Auto-increment id-numbers
+create sequence test_seq 
+start with 1 
+increment by 1 
+nomaxvalue; 
