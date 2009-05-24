@@ -4,7 +4,7 @@
 /* Overview: This stored proc shall retrieve titles and 
  * genres of all movies directed by a director */ 
 
-CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector (directorName VARCHAR2)
+CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector (IN directorName VARCHAR2)
 AS 
 BEGIN
     EXECUTE IMMEDIATE 
