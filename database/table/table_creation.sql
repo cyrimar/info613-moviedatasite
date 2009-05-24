@@ -75,7 +75,7 @@ CREATE TABLE sequence (
 );
 
 --Auto-increment id-numbers
-create sequence test_seq 
-start with 1 
-increment by 1 
-nomaxvalue; 
+CREATE sequence test_seq 
+START WITH 1 
+INCREMENT by 1 
+NOMAXVALUE; 
