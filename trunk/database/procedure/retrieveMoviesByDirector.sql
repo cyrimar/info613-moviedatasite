@@ -4,11 +4,13 @@
 /* Overview: This stored proc shall retrieve titles and 
  * genres of all movies directed by a director */ 
 
-CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector (IN directorName VARCHAR2)
-AS 
+CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector 
+(directorName VARCHAR2)
+IS 
+sql_st VARCHAR2(200);
+name VARCHAR2(100) :=directorName;
 BEGIN
-    EXECUTE IMMEDIATE 
-    'SELECT 
+    sql_st:= 'SELECT 
     M.TITLE, G.GENRE_NAME
     FROM 
     MOVIE M, GENRE G, MOVIE_GENRE MG, 
@@ -18,6 +20,7 @@ BEGIN
     MD.MOVIE_ID = M.MOVIE_ID AND
     MG.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    D.DIRECTOR_NAME =' || directorName;
+    D.DIRECTOR_NAME =' || name;
+    EXECUTE IMMEDIATE sql_st;
 END; 
 /
