@@ -17,7 +17,7 @@ BEGIN
     P.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    A.FIRST_NAME =' || actorFName ' AND 
+    A.FIRST_NAME =' || actorFName || ' AND 
     A.LAST_NAME =' || actorLName;
 END; 
 /
