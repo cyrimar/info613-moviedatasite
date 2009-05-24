@@ -5,12 +5,12 @@
  * genres of all movies directed by a director */ 
 
 CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector 
-(directorName VARCHAR2)
+(directorName IN VARCHAR2)
 IS 
 sql_st VARCHAR2(200);
-name VARCHAR2(100) :=directorName;
+name VARCHAR2(100) := directorName;
 BEGIN
-    sql_st:= 'SELECT 
+    sql_st := 'SELECT 
     M.TITLE, G.GENRE_NAME
     FROM 
     MOVIE M, GENRE G, MOVIE_GENRE MG, 
