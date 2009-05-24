@@ -8,7 +8,8 @@ CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByActor (actorFName IN VARCHAR2,
 actorLName IN VARCHAR2)
 IS 
 BEGIN
-	SELECT 
+    EXECUTE IMMEDIATE 
+	'SELECT 
     M.TITLE, G.GENRE_NAME 
     FROM 
     MOVIE M, GENRE G, MOVIE_GENRE MG, PLAYS P, ACTOR A 
@@ -17,7 +18,7 @@ BEGIN
     P.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    A.FIRST_NAME = actorFName AND
-    A.LAST_NAME = actorLName;
+    A.FIRST_NAME =' || actorFName ' AND 
+    A.LAST_NAME =' || actorLName '';
 END; 
 /
