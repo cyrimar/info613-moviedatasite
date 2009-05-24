@@ -7,7 +7,8 @@
 CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector (directorName IN VARCHAR2)
 IS 
 BEGIN
-    SELECT 
+    EXECUTE IMMEDIATE 
+    'SELECT 
     M.TITLE, G.GENRE_NAME
     FROM 
     MOVIE M, GENRE G, MOVIE_GENRE MG, 
@@ -17,6 +18,6 @@ BEGIN
     MD.MOVIE_ID = M.MOVIE_ID AND
     MG.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    D.DIRECTOR_NAME = directorName;
+    D.DIRECTOR_NAME =' || directorName '';
 END; 
 /
