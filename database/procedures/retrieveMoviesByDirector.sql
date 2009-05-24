@@ -19,3 +19,4 @@ BEGIN
     MG.GENRE_ID = G.GENRE_ID AND
     D.DIRECTOR_NAME = directorName;
 END; 
+/
