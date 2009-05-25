@@ -7,7 +7,7 @@
 CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByActor 
 (actorFName IN VARCHAR2,actorLName IN VARCHAR2)
 IS
-sql_st VARCHAR2(200);
+sql_st VARCHAR2(500);
 fname VARCHAR2(100) := actorFName;
 lname VARCHAR2(100) := actorLName;
 BEGIN
@@ -20,8 +20,8 @@ BEGIN
     P.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    A.FIRST_NAME =' || fname || ' AND 
-    A.LAST_NAME =' || lname ;
+    A.FIRST_NAME =''' || fname || ''' AND  
+    A.LAST_NAME =''' || lname || '''';
     EXECUTE IMMEDIATE sql_st;
 END; 
 /
