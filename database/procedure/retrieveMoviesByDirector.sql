@@ -3,24 +3,23 @@
 /* Date: May 23, 2009*/
 /* Overview: This stored proc shall retrieve titles and 
  * genres of all movies directed by a director */ 
-
-CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector 
-(directorName IN VARCHAR2)
-IS 
-sql_st VARCHAR2(500);
-name VARCHAR2(100) := directorName;
+CREATE OR REPLACE FUNCTION retrieveMoviesByDirector 
+(directorName IN VARCHAR2) RETURN SYS_REFCURSOR 
+AS 
+l_cursor SYS_REFCURSOR;
 BEGIN
-    sql_st := 'SELECT 
-    M.TITLE, G.GENRE_NAME
-    FROM 
-    MOVIE M, GENRE G, MOVIE_GENRE MG, 
-    DIRECTOR D, MOVIE_DIRECTOR MD
-    WHERE
-    MD.DIRECTOR_ID = D.DIRECTOR_ID AND
-    MD.MOVIE_ID = M.MOVIE_ID AND
-    MG.MOVIE_ID = M.MOVIE_ID AND
-    MG.GENRE_ID = G.GENRE_ID AND
-    D.DIRECTOR_NAME = ''' || name || '''';
-    EXECUTE IMMEDIATE sql_st;
+OPEN l_cursor FOR 
+SELECT 
+M.TITLE, G.GENRE_NAME
+FROM 
+MOVIE M, GENRE G, MOVIE_GENRE MG, 
+DIRECTOR D, MOVIE_DIRECTOR MD
+WHERE
+MD.DIRECTOR_ID = D.DIRECTOR_ID AND
+MD.MOVIE_ID = M.MOVIE_ID AND
+MG.MOVIE_ID = M.MOVIE_ID AND
+MG.GENRE_ID = G.GENRE_ID AND
+D.DIRECTOR_NAME = '' || directorName || '''';
+RETURN l_cursor;
 END; 
 /
