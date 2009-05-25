@@ -9,11 +9,13 @@ import java.util.List;
  */
 public class Movie {
 
-    private String         title;
-    private String         year;
-    private List<Director> directors = new ArrayList<Director>();
-    private List<Genre>    genres    = new ArrayList<Genre>();
-    private List<Actor>    actors    = new ArrayList<Actor>();
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    private String              title;
+    private String              year;
+    private List<Director>      directors      = new ArrayList<Director>();
+    private List<Genre>         genres         = new ArrayList<Genre>();
+    private List<Actor>         actors         = new ArrayList<Actor>();
 
     /**
      * Empty Constructor. Initializes title and year to empty strings.
@@ -142,4 +144,25 @@ public class Movie {
         this.actors = actors;
     }
 
+    /**
+     * Convenience method for representing the Movie object as a string
+     */
+    public String toString() {
+        String ret = "***************" + LINE_SEPARATOR;
+        ret = ret + "Title: " + this.title + LINE_SEPARATOR;
+        ret = ret + "Year: " + this.year + LINE_SEPARATOR;
+        ret = ret + "Directors: " + LINE_SEPARATOR;
+        for (Director director : this.directors) {
+            ret = ret + "\t" + director.getName() + LINE_SEPARATOR;
+        }
+        ret = ret + "Genres: " + LINE_SEPARATOR;
+        for (Genre genre : this.genres) {
+            ret = ret + "\t" + genre.getName() + LINE_SEPARATOR;
+        }
+        ret = ret + "Actors: " + LINE_SEPARATOR;
+        for (Actor actor : this.actors) {
+            ret = ret + "\t" + actor.getFirstName() + " " + actor.getLastName() + LINE_SEPARATOR;
+        }
+        return ret;
+    }
 }
