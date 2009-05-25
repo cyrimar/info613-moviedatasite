@@ -7,7 +7,7 @@
 CREATE OR REPLACE PROCEDURE sp_retrieveMoviesByDirector 
 (directorName IN VARCHAR2)
 IS 
-sql_st VARCHAR2(200);
+sql_st VARCHAR2(500);
 name VARCHAR2(100) := directorName;
 BEGIN
     sql_st := 'SELECT 
@@ -20,7 +20,7 @@ BEGIN
     MD.MOVIE_ID = M.MOVIE_ID AND
     MG.MOVIE_ID = M.MOVIE_ID AND
     MG.GENRE_ID = G.GENRE_ID AND
-    D.DIRECTOR_NAME =' || name;
+    D.DIRECTOR_NAME = ''' || name || '''';
     EXECUTE IMMEDIATE sql_st;
 END; 
 /
