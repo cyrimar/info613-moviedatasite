@@ -9,7 +9,7 @@ CREATE OR REPLACE FUNCTION retrieveMoviesByActor
 IS
 l_cursor SYS_REFCURSOR;
 fname VARCHAR2(100) := actorFName;
-lname VARCHAR2(100) :=actorLName;
+lname VARCHAR2(100) := actorLName;
 BEGIN
 OPEN l_cursor FOR
 SELECT 
