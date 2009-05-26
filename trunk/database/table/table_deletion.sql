@@ -11,3 +11,7 @@ DROP TABLE director;
 DROP TABLE plays;
 DROP TABLE movie;
 DROP TABLE actor;
+DROP SEQUENCE movie_seq;
+DROP SEQUENCE director_seq;
+DROP SEQUENCE genre_seq; 
+DROP SEQUENCE actor_seq;
