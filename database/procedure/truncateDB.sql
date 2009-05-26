@@ -1,8 +1,9 @@
 /* Context: INFO 613 DDL movie data web site*/
 /* File Name: Truncation of Data from DB*/
 /* Date: May 23, 2009*/
-/* Overview: This stored proc shall shall remove only 
- * the data from the tables and leave the 
+/* Overview: This stored proc shall shall remove 
+ * the data, reset sequence numbers, 
+ * and leave the 
  * structure intact.*/ 
 
 CREATE OR REPLACE PROCEDURE truncateDB 
