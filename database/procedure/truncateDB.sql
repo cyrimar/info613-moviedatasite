@@ -23,34 +23,34 @@ DELETE FROM actor;
 DELETE FROM movie;
 DELETE FROM director;
 DELETE FROM genre; 
-IF m_id > 0
+IF m_id > 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence movie_seq increment by -' || m_id;
-IF m_seq.currval = 0
+IF m_seq.currval = 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence movie_seq increment by 1';
 END IF;
 END IF;
-IF g_id > 0
+IF g_id > 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence genre_seq increment by -' || g_id;
-IF g_seq.currval = 0
+IF g_seq.currval = 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence genre_seq increment by 1';
 END IF;
 END IF;
-IF d_id > 0
+IF d_id > 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence director_seq increment by -' || d_id;
-IF d_seq.currval = 0
+IF d_seq.currval = 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence director_seq increment by 1';
 END IF;
 END IF;
-IF a_id > 0
+IF a_id > 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence actor_seq increment by -' || a_id;
-IF a_seq.currval = 0
+IF a_seq.currval = 0 THEN
 EXECUTE IMMEDIATE
 'alter sequence actor_seq increment by 1';
 END IF;
