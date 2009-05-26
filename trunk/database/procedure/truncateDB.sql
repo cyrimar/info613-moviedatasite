@@ -8,15 +8,8 @@
 
 CREATE OR REPLACE PROCEDURE truncateDB 
 IS
-m_id NUMBER;
-a_id NUMBER;
-g_id NUMBER;
-d_id NUMBER;
+l_val number;
 BEGIN
-SELECT MAX(MOVIE_ID) INTO m_id FROM MOVIE;
-SELECT MAX(ACTOR_ID) INTO a_id FROM ACTOR;
-SELECT MAX(GENRE_ID) INTO g_id FROM GENRE;
-SELECT MAX(DIRECTOR_ID) INTO d_id FROM DIRECTOR;
 DELETE FROM movie_genre;
 DELETE FROM movie_director;
 DELETE FROM plays;
@@ -24,37 +17,42 @@ DELETE FROM actor;
 DELETE FROM movie;
 DELETE FROM director;
 DELETE FROM genre; 
-IF m_id > 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence movie_seq increment by -' || m_id;
-IF m_seq.currval = 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence movie_seq increment by 1';
-END IF;
-END IF;
-IF g_id > 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence genre_seq increment by -' || g_id;
-IF g_seq.currval = 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence genre_seq increment by 1';
-END IF;
-END IF;
-IF d_id > 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence director_seq increment by -' || d_id;
-IF d_seq.currval = 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence director_seq increment by 1';
-END IF;
-END IF;
-IF a_id > 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence actor_seq increment by -' || a_id;
-IF a_seq.currval = 0 THEN
-EXECUTE IMMEDIATE
-'alter sequence actor_seq increment by 1';
-END IF;
-END IF;
+
+EXECUTE IMMEDIATE 
+'SELECT movie_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'alter sequence movie_seq INCREMENT by -' || l_val || ' minvalue 0';    
+EXECUTE IMMEDIATE 
+'SELECT movie_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence movie_seq INCREMENT by 1 minvalue 0';
+
+EXECUTE IMMEDIATE 
+'SELECT actor_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence actor_seq INCREMENT by -' || l_val || ' minvalue 0';    
+EXECUTE IMMEDIATE 
+'SELECT actor_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence actor_seq INCREMENT by 1 minvalue 0';
+
+EXECUTE IMMEDIATE 
+'SELECT genre_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence genre_seq INCREMENT by -' || l_val || ' minvalue 0';    
+EXECUTE IMMEDIATE 
+'SELECT genre_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence genre_seq INCREMENT by 1 minvalue 0';
+
+EXECUTE IMMEDIATE 
+'SELECT director_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence director_seq INCREMENT by -' || l_val || ' minvalue 0';    
+EXECUTE IMMEDIATE 
+'SELECT director_seq.nextval FROM dual' INTO l_val;    
+EXECUTE IMMEDIATE 
+'ALTER sequence director_seq INCREMENT by 1 minvalue 0';
+
 END;
 /
