@@ -21,7 +21,7 @@ DELETE FROM genre;
 EXECUTE IMMEDIATE 
 'SELECT movie_seq.nextval FROM dual' INTO l_val;    
 EXECUTE IMMEDIATE 
-'alter sequence movie_seq INCREMENT by -' || l_val || ' minvalue 0';    
+'ALTER sequence movie_seq INCREMENT by -' || l_val || ' minvalue 0';    
 EXECUTE IMMEDIATE 
 'SELECT movie_seq.nextval FROM dual' INTO l_val;    
 EXECUTE IMMEDIATE 
