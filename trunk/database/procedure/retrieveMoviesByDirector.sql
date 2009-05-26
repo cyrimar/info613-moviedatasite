@@ -2,7 +2,8 @@
 /* File Name: Retrieval of Movies By a Director*/
 /* Date: May 23, 2009*/
 /* Overview: This stored proc shall retrieve titles and 
- * genres of all movies directed by a director */ 
+ * genres of all movies directed by a director */
+
 CREATE OR REPLACE FUNCTION retrieveMoviesByDirector 
 (directorName IN VARCHAR2) RETURN SYS_REFCURSOR 
 AS 
