@@ -27,8 +27,8 @@ CREATE TABLE movie (
 
 --Association table between Actor and Movie entities
 CREATE TABLE plays (
+    movie_id	numeric(10)	NOT NULL,
 	actor_id	numeric(10)	NOT NULL,
-	movie_id	numeric(10)	NOT NULL,
 	CONSTRAINT plays_pk PRIMARY KEY (actor_id,movie_id),
 	CONSTRAINT plays_actor_fk FOREIGN KEY (actor_id) REFERENCES actor(actor_id),
 	CONSTRAINT plays_movie_fk FOREIGN KEY (movie_id) REFERENCES movie(movie_id)	
@@ -75,7 +75,22 @@ CREATE TABLE sequence (
 );
 
 --Auto-increment id-numbers
-CREATE sequence seq 
+CREATE sequence mov_seq 
 START WITH 1 
 INCREMENT by 1 
 NOMAXVALUE; 
+
+CREATE sequence director_seq 
+START WITH 1 
+INCREMENT by 1 
+NOMAXVALUE;
+
+CREATE sequence genre_seq 
+START WITH 1 
+INCREMENT by 1 
+NOMAXVALUE;
+
+CREATE sequence actor_seq 
+START WITH 1 
+INCREMENT by 1 
+NOMAXVALUE;
