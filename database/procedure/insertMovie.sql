@@ -18,21 +18,23 @@ CREATE OR REPLACE PROCEDURE insertActor
 IS
 cnt NUMBER;
 id NUMBER;
+movie_id NUMBER;
 BEGIN
 SELECT COUNT(*) INTO cnt from ACTOR 
 WHERE first_name = actorFName
 AND last_name = actorLName;
+SELECT MAX(movie_id) INTO movie_id from MOVIE;
 IF cnt > 0 THEN 
 SELECT actor_id into id from ACTOR 
 WHERE first_name = actorFName
 AND last_name = actorLName;
 INSERT INTO PLAYS
-VALUES(movie_seq.currval,id);
+VALUES(movie_id,id);
 ELSE
 INSERT INTO ACTOR
 VALUES (actor_seq.nextval, actorFName, actorLName);
 INSERT INTO PLAYS
-VALUES(movie_seq.currval,actor_seq.currval);
+VALUES(movie_id,actor_seq.currval);
 END IF;
 END;
 /
@@ -41,19 +43,21 @@ CREATE OR REPLACE PROCEDURE insertDirector
 IS
 id NUMBER;
 cnt NUMBER;
+movie_id NUMBER;
 BEGIN
 SELECT COUNT(*) INTO cnt from DIRECTOR
 WHERE director_name = directorName;
+SELECT MAX(movie_id) INTO movie_id from MOVIE;
 IF cnt > 0 THEN 
 SELECT director_id INTO id FROM DIRECTOR 
 WHERE director_name = directorName;
 INSERT INTO MOVIE_DIRECTOR
-VALUES(movie_seq.currval,id);
+VALUES(movie_id,id);
 ELSE
 INSERT INTO DIRECTOR
 VALUES (director_seq.nextval, directorName);
 INSERT INTO MOVIE_DIRECTOR
-VALUES(movie_seq.currval,director_seq.currval);
+VALUES(movie_id,director_seq.currval);
 END IF;
 END;
 /
@@ -62,19 +66,21 @@ CREATE OR REPLACE PROCEDURE insertGenre
 IS
 id NUMBER;
 cnt NUMBER;
+movie_id NUMBER;
 BEGIN
 SELECT COUNT(*) INTO cnt from GENRE
 WHERE genre_name = genreName;
+SELECT MAX(movie_id) INTO movie_id from MOVIE;
 IF cnt > 0 THEN 
 SELECT genre_id INTO id FROM GENRE 
 WHERE genre_name = genreName;
 INSERT INTO MOVIE_GENRE
-VALUES(movie_seq.currval,id);
+VALUES(movie_id,id);
 ELSE
 INSERT INTO GENRE 
 VALUES (genre_seq.nextval,genreName);
 INSERT INTO MOVIE_GENRE
-VALUES(movie_seq.currval,genre_seq.currval);
+VALUES(movie_id,genre_seq.currval);
 END IF;
 END;
 /
