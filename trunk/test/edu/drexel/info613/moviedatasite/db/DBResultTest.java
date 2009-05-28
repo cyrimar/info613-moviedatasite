@@ -1,7 +1,7 @@
 package edu.drexel.info613.moviedatasite.db;
 
 import junit.framework.TestCase;
-import edu.drexel.info613.moviedatasite.db.*;
+import edu.drexel.info613.moviedatasite.db.DBResult;
 
 /**
  * This class is used to test the DBResult
