@@ -13,8 +13,8 @@ import oracle.jdbc.driver.*;
  */
 public class MovieDB {
     private static MovieDB           instance        = null;
-    private final String      ORACLE_USERNAME = "by32";
-    private final String      ORACLE_PASSWORD = "yuk12yuk";
+    private final String      ORACLE_USERNAME = "";
+    private final String      ORACLE_PASSWORD = "";
     private Connection        conn            = null;
     private CallableStatement cs              = null;
     private ResultSet         rs              = null;
