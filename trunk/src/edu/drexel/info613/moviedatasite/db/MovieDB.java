@@ -49,7 +49,7 @@ public class MovieDB {
      * 
      * @return  DBResult
      */
-    public DBResult insertMovies(LinkedList<Movie> movies) {
+    public DBResult insertMovies(List<Movie> movies) {
         //keep track of sps and report if one of them fail
         String traceProc = null;
 
