@@ -4,18 +4,22 @@ import edu.drexel.info613.moviedatasite.domain.Director;
 import edu.drexel.info613.moviedatasite.domain.Actor;
 import edu.drexel.info613.moviedatasite.domain.Movie;
 import edu.drexel.info613.moviedatasite.db.DBResult;
-import java.util.*;
-import java.sql.*;
-import oracle.jdbc.driver.*;
+import java.util.List;
+import java.util.LinkedList;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import oracle.jdbc.driver.OracleTypes;
 
 /*
  * This class will be a singleton and provide access to the underlying Oracle DB. It will handle
  * data truncation (called from TruncateDBServlet), insertion (called from UploadDataServlet), and
- * reporting (called from ReportingServlet). 
- * @author Patrick Freestone, Batuhan Yukselen
+ * reporting (called from ReportingServlet). @author Patrick Freestone, Batuhan Yukselen
  */
 public class MovieDB {
-    private static MovieDB           instance        = null;
+    private static MovieDB    instance        = null;
     private final String      ORACLE_USERNAME = "by32";
     private final String      ORACLE_PASSWORD = "yuk12yuk";
     private Connection        conn            = null;
@@ -41,11 +45,10 @@ public class MovieDB {
 
         return instance;
     }
-    
+
     protected MovieDB() {
         // Exists only to defeat instantiation.
-     }
-
+    }
 
     /**
      * Fetch domain object info into DB tables
@@ -68,7 +71,7 @@ public class MovieDB {
                 Movie movie = movies.get(i);
 
                 traceMovie = movie.getTitle();
-                
+
                 /*******Insert Movie Title and Movie Year into Movie Tbl**********/
 
                 traceProc = INSERT_MOVIE;
@@ -77,7 +80,7 @@ public class MovieDB {
 
                 // Set the value for the IN parameters
                 cs.setString(1, movie.getTitle());
-                cs.setInt(2,Integer.parseInt(movie.getYear()));
+                cs.setInt(2, Integer.parseInt(movie.getYear()));
 
                 //Execute and populate movie tbl
                 cs.execute();
@@ -172,36 +175,30 @@ public class MovieDB {
             cs.execute();
 
             rs = (ResultSet)cs.getObject(1);
-            
+
             //print movie title and genre name
-           /* while (rs.next()) 
-            {
-                System.out.println(rs.getString(1) + "\t" +
-                               rs.getString(2) + "\t" );
-            }*/
-             
-             if (rs.next()== true) {
-               
+            /*while (rs.next()) 
+             {
+                 System.out.println(rs.getString(1) + "\t" +
+                                rs.getString(2) + "\t" );
+             }*/
+
+            //iterate through records as long as they exist
+            while (rs.next()) {
+
                 //result[0] = movieTitle
                 //result[1] = movieGenre
                 String result[] = new String[2];
-                
+
                 //read the values from the first row
                 result[0] = rs.getString(1);
                 result[1] = rs.getString(2);
                 resultList.add(result);
 
-                //iterate through other rows if exists
-                while (rs.next() == true) {
-                    result[0] = rs.getString(1);
-                    result[1] = rs.getString(2);
-                    resultList.add(result);
-                }
-
                 //clean-up array
                 result = null;
+
             }
-             
 
             //close resultset, statement, and connection
             rs.close();
@@ -243,10 +240,10 @@ public class MovieDB {
 
             //execute and retrieve the result
             cs.execute();
-            
+
             //get RefCursor containing genre and movie title from DB
             rs = (ResultSet)cs.getObject(1);
-            
+
             //print movie title and genre name
             //for testing
             /*while (rs.next()) 
@@ -254,28 +251,23 @@ public class MovieDB {
                 System.out.println(rs.getString(1) + "\t" +
                                rs.getString(2) + "\t" );
             }*/
-            
-            if (rs.next()) {
+
+            //iterate through records as long as they exist
+            while (rs.next()) {
 
                 //result[0] = movieTitle
                 //result[1] = movieGenre
-                String[] result = new String[2];
-                
+                String result[] = new String[2];
+
                 //read the values from the first row
                 result[0] = rs.getString(1);
                 result[1] = rs.getString(2);
                 resultList.add(result);
 
-                //iterate through other rows if exists
-                while (rs.next() == true) {
-                    result[0] = rs.getString(1);
-                    result[1] = rs.getString(2);
-                    resultList.add(result);
-                }
-
                 //clean-up array
                 result = null;
-            } //end if
+
+            }
 
             //close resultset, statement, and connection
             rs.close();
