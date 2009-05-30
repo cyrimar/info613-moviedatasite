@@ -118,8 +118,6 @@ public class MovieDBTest extends TestCase {
             for (int i=0; i< result.size();i++)
             {
                 assertEquals(movie.getTitle(), result.get(i)[0]);
-                //linked list adds element to the tail, so the first element of array
-                //matches up the last element of linked list 
                 assertEquals(movie.getGenres().get(i).getName(), result.get(i)[1]);
             }
         }
@@ -148,14 +146,12 @@ public class MovieDBTest extends TestCase {
          
         if (result.size()>0)
         {
-            
             for (int i=0; i< result.size();i++)
             {
                 assertEquals(movie.getTitle(), result.get(i)[0]);
                 //linked list adds element to the tail, so the first element of array
                 //matches up the last element of linked list 
-                //assertEquals(movie.getGenres().get(result.size() - i - 1).getName(), result.get(i)[1]);
-                //assertEquals(movie.getGenres().get(i).getName(), result.get(i)[1]);
+                assertEquals(movie.getGenres().get(i).getName(), result.get(i)[1]);
             }
         }
         
