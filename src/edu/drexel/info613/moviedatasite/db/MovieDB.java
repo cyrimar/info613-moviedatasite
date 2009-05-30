@@ -1,6 +1,8 @@
 package edu.drexel.info613.moviedatasite.db;
 
-import edu.drexel.info613.moviedatasite.domain.*;
+import edu.drexel.info613.moviedatasite.domain.Director;
+import edu.drexel.info613.moviedatasite.domain.Actor;
+import edu.drexel.info613.moviedatasite.domain.Movie;
 import edu.drexel.info613.moviedatasite.db.DBResult;
 import java.util.*;
 import java.sql.*;
@@ -171,9 +173,6 @@ public class MovieDB {
 
             rs = (ResultSet)cs.getObject(1);
             
-            //move the cursor to the first row
-            rs.next();
-            
             //print movie title and genre name
            /* while (rs.next()) 
             {
@@ -181,7 +180,7 @@ public class MovieDB {
                                rs.getString(2) + "\t" );
             }*/
              
-             if (!rs.getString(1).isEmpty()) {
+             if (rs.next()== true) {
                
                 //result[0] = movieTitle
                 //result[1] = movieGenre
@@ -247,9 +246,6 @@ public class MovieDB {
             
             //get RefCursor containing genre and movie title from DB
             rs = (ResultSet)cs.getObject(1);
-
-            //move the cursor to the first row
-            rs.next();
             
             //print movie title and genre name
             //for testing
@@ -259,7 +255,7 @@ public class MovieDB {
                                rs.getString(2) + "\t" );
             }*/
             
-            if (!rs.getString(1).isEmpty()) {
+            if (rs.next()) {
 
                 //result[0] = movieTitle
                 //result[1] = movieGenre
