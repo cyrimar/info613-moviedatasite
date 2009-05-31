@@ -19,19 +19,20 @@ import oracle.jdbc.driver.OracleTypes;
  * reporting (called from ReportingServlet). @author Patrick Freestone, Batuhan Yukselen
  */
 public class MovieDB {
-    private static MovieDB    instance        = null;
-    private final String      ORACLE_USERNAME = "by32";
-    private final String      ORACLE_PASSWORD = "yuk12yuk";
-    private Connection        conn            = null;
-    private CallableStatement cs              = null;
-    private ResultSet         rs              = null;
-    private String            url             = null;
-    private DBResult          dbResult        = new DBResult();
+    private static MovieDB      instance        = null;
+    private final String        ORACLE_USERNAME = "";
+    private final String        ORACLE_PASSWORD = "";
+    private Connection          conn            = null;
+    private CallableStatement   cs              = null;
+    private ResultSet           rs              = null;
+    private String              url             = null;
+    private DBResult            dbResult        = new DBResult();
 
-    private final String      INSERT_MOVIE    = "Movie Insertion";
-    private final String      INSERT_DIRECTOR = "Director Insertion";
-    private final String      INSERT_GENRE    = "Genre Insertion";
-    private final String      INSERT_ACTOR    = " Actor Insertion";
+    private final String        INSERT_MOVIE    = "Movie Insertion";
+    private final String        INSERT_DIRECTOR = "Director Insertion";
+    private final String        INSERT_GENRE    = "Genre Insertion";
+    private final String        INSERT_ACTOR    = " Actor Insertion";
+    private static final String LINE_SEPARATOR  = System.getProperty("line.separator");
 
     /**
      * Provide a global point of access to the object and ensure that 
@@ -142,7 +143,10 @@ public class MovieDB {
 
         catch (SQLException ex) {
             dbResult.setSuccess(false);
-            dbResult.setError(traceProc + " Failed For " + traceMovie);
+            String errorMessage = traceProc + " Failed For " + traceMovie + LINE_SEPARATOR;
+            errorMessage = errorMessage + "Messge: " + ex.getMessage() + LINE_SEPARATOR;
+            errorMessage = errorMessage + "SQL State: " + ex.getSQLState() + LINE_SEPARATOR;
+            dbResult.setError(errorMessage);
         }
 
         return dbResult;
@@ -210,7 +214,10 @@ public class MovieDB {
 
         catch (SQLException ex) {
             dbResult.setSuccess(false);
-            dbResult.setError("Failed to retrieve movies by actor");
+            String errorMessage = "Faile to retrieve movies by actor" + LINE_SEPARATOR;
+            errorMessage = errorMessage + "Messge: " + ex.getMessage() + LINE_SEPARATOR;
+            errorMessage = errorMessage + "SQL State: " + ex.getSQLState() + LINE_SEPARATOR;
+            dbResult.setError(errorMessage);
         }
 
         return resultList;
@@ -279,7 +286,10 @@ public class MovieDB {
 
         catch (SQLException ex) {
             dbResult.setSuccess(false);
-            dbResult.setError("Failed to retrieve movies by director");
+            String errorMessage = "Faile to retrieve movies by director" + LINE_SEPARATOR;
+            errorMessage = errorMessage + "Messge: " + ex.getMessage() + LINE_SEPARATOR;
+            errorMessage = errorMessage + "SQL State: " + ex.getSQLState() + LINE_SEPARATOR;
+            dbResult.setError(errorMessage);
         }
 
         return resultList;
