@@ -70,7 +70,7 @@ public class MovieDB {
                 //get a new connection for each movie object in movies collection
                 establishConnection();
                 
-                //a single xml data fields are stored into movie object
+                //data fields in a single xml are stored into movie object
                 Movie movie = movies.get(i);
 
                 traceMovie = movie.getTitle();
