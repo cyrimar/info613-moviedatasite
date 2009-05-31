@@ -20,8 +20,8 @@ import oracle.jdbc.driver.OracleTypes;
  */
 public class MovieDB {
     private static MovieDB      instance        = null;
-    private final String        ORACLE_USERNAME = "pgf23";
-    private final String        ORACLE_PASSWORD = "wpf8tf8m";
+    private final String        ORACLE_USERNAME = "";
+    private final String        ORACLE_PASSWORD = "";
     private Connection          conn            = null;
     private CallableStatement   cs              = null;
     private ResultSet           rs              = null;
