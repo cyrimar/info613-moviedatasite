@@ -26,7 +26,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-/*
+/**
  * This class is responsible for converting XML files into domain objects.
  * @author Patrick Freestone, Batuhan Yukselen
  */
@@ -142,6 +142,9 @@ public class MovieDataXMLParser {
         Node node = XPathAPI.selectSingleNode(doc, "//W4F_DOC/Movie/Year");
         Element titleElement = (Element)node;
         year = titleElement.getTextContent();
+        if (year == null || year.equals("")) {
+            year = " ";
+        }
         return year;
     }
 
@@ -157,6 +160,9 @@ public class MovieDataXMLParser {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element directorElement = (Element)nodeList.item(i);
             String directorName = directorElement.getTextContent();
+            if (directorName == null || directorName.equals("")) {
+                directorName = " ";
+            }
             Director director = new Director(directorName);
             directors.add(director);
         }
@@ -175,6 +181,9 @@ public class MovieDataXMLParser {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element genreElement = (Element)nodeList.item(i);
             String genreName = genreElement.getTextContent();
+            if (genreName == null || genreName.equals("")) {
+                genreName = " ";
+            }
             Genre genre = new Genre(genreName);
             genres.add(genre);
         }
@@ -196,6 +205,12 @@ public class MovieDataXMLParser {
             Element actorLastNameElement = (Element)XPathAPI.selectSingleNode(actorElement, "LastName");
             String firstName = actorFirstNameElement.getTextContent();
             String lastName = actorLastNameElement.getTextContent();
+            if (firstName == null || firstName.equals("")) {
+                firstName = " ";
+            }
+            if (lastName == null || lastName.equals("")) {
+                lastName = " ";
+            }
             Actor actor = new Actor(firstName, lastName);
             actors.add(actor);
         }
