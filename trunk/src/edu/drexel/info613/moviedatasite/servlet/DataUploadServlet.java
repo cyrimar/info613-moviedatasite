@@ -32,7 +32,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-/** This servlet handles data upload requests.
+/** This servlet handles uploading xml files for the Movie Data Website.
  * 
  * @author Patrick Freestone, Batuhan Yukselen
  */
@@ -47,10 +47,13 @@ public class DataUploadServlet extends HttpServlet {
     private static final String HTML_STREAM_END   = "</body></html>";
 
     /**
+     * The processRequest method is the main driver for the servlet. The method coordinates writing the 
+     * uploaded file to disk, extracting it from a zip if necessary, retrieving domain objects from the xml
+     * file, writing the domain objects to the database, and reporting on the results back to the user.
      * 
-     * @param request
-     * @param response
-     * @throws ServletException
+     * @param request           HTTP request sent to the servlet
+     * @param response          HTTP response to be sent back to the requester
+     * @throws ServletException 
      * @throws IOException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -79,23 +82,29 @@ public class DataUploadServlet extends HttpServlet {
     }
 
     /**
-     * 
+     * Method for handling form using the "Get" method. All requests are forwarded to the processRequest
+     * method.
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
     /**
-     * 
+     * Method for handling form using the "Post" method. All requests are forwarded to the processRequest
+     * method.
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
     /**
+     * This method is responsible for making a directory to which to write the uploaded files. The directory
+     * is located in the java.io.tmpdir location and is named using the current time in milliseconds. This
+     * could cause issues if two uploads occur at exactly the same time, as there could be contention for, a
+     * specific directory name. However, since this is not a high-volume system, the implemented solution 
+     * should suffice.
      * 
-     * @param userAddress
-     * @return
+     * @return  directory where file should be uploaded.
      */
     private File makeFileUploadDirectory() {
         File uploadsDir = new File(UPLOADED_FILE_DIR);
@@ -109,10 +118,12 @@ public class DataUploadServlet extends HttpServlet {
     }
 
     /**
+     * This method is responsible for writing the uploaded file to disk in the directory created by the
+     * <code>makeFileUploadedDirectory</code> method. 
      * 
-     * @param request
-     * @param directoryToWriteTo
-     * @return
+     * @param request               incoming request in which file is contained
+     * @param directoryToWriteTo    location to which to write the uploaded file
+     * @return                      new file written to disk
      */
     private File writeUploadedFileToDisk(HttpServletRequest request, File directoryToWriteTo) {
         FileItemFactory factory = new DiskFileItemFactory();
@@ -142,8 +153,13 @@ public class DataUploadServlet extends HttpServlet {
 
     /**
      * Zip extraction modified from http://java.sun.com/developer/technicalArticles/Programming/compression/
-     * @param uploadedFile
-     * @return
+     * This method is responsible for generating the list of <code>File</code> objects from the uploaded file.
+     * If this uploaded file the method will extract the file and add all contained xml files to the returned
+     * list.
+     * 
+     * @param uploadedFile  file uploaded by user
+     * @return              <code>List</code> of <code>File</code> objects from the uploaded file that are
+     *                      xml files
      */
     private List<File> getXMLFileListFromUploadedFile(File uploadedFile) {
         List<File> listOfXMLFiles = new ArrayList<File>();
@@ -181,19 +197,18 @@ public class DataUploadServlet extends HttpServlet {
                     }
                 }
                 zis.close();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         return listOfXMLFiles;
     }
 
     /**
+     * Method to construction the directory to which to extract an uploaded zip file.
      * 
-     * @param zipFile
-     * @return
+     * @param zipFile   the file being unzipped
+     * @return          the directory to which to extract the file
      */
     private String constructZipExtractionDirectory(File zipFile) {
         String extractionDirName = zipFile.getParent() + FILE_SEPARATOR + zipFile.getName().substring(0, zipFile.getName().length() - 4);
@@ -206,10 +221,12 @@ public class DataUploadServlet extends HttpServlet {
     }
 
     /**
+     * This method is responsible for writing the result page. The page will report on the files successfully
+     * uploaded, the files that failed to be uploaded, and the result of writing to the DB.
      * 
-     * @param response
-     * @param xmlResult
-     * @param dbResult
+     * @param response  response to which to write HTML output
+     * @param xmlResult result of converting XML files to domain objects
+     * @param dbResult  result of writing domain objects to DB
      */
     private void writeUploadResultsPage(HttpServletResponse response, XMLUploadResult xmlResult, DBResult dbResult) {
         try {
@@ -217,11 +234,12 @@ public class DataUploadServlet extends HttpServlet {
             out.print(HTML_STREAM_BEGIN);
 
             out.print("<h2>Successfully Uploaded Files</h2>");
-            out.print("<table><tr><th>File Name</th></tr>");
+            out.print("<p>Count: " + xmlResult.getSuccessfulFiles().size() + "</p>");
+            out.print("<p>Files: ");
             for (File file : xmlResult.getSuccessfulFiles()) {
-                out.print("<tr><td>" + file.getName() + "</td></tr>");
+                out.print(file.getName() + ", ");
             }
-            out.print("</table><br/>");
+            out.print("</p><br/>");
 
             out.print("<h2>File Upload Failures</h2>");
             out.print("<table><tr><th>File Name</th><th>Error</th></tr>");
@@ -245,9 +263,11 @@ public class DataUploadServlet extends HttpServlet {
     }
 
     /**
+     * This method is responsible for writing an error page. The method accepts an error message as a 
+     * <code>String</code>.
      * 
-     * @param response
-     * @param errorMessage
+     * @param response      response to which to write page
+     * @param errorMessage  error message to report on in page
      */
     private void writeUploadErrorPage(HttpServletResponse response, String errorMessage) {
         try {
