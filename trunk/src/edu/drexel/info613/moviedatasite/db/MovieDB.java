@@ -63,11 +63,13 @@ public class MovieDB {
         //keep track of movie domain obj and report if one of sps fail
         String traceMovie = null;
 
-        establishConnection();
-
         try {
             //Distribute each movie object Info into DB relations 
             for (int i = 0; i < movies.size(); i++) {
+                
+                //get a new connection for each movie object in movies collection
+                establishConnection();
+                
                 //a single xml data fields are stored into movie object
                 Movie movie = movies.get(i);
 
