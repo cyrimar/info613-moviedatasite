@@ -30,5 +30,13 @@
   	<servlet-name>reporting</servlet-name>
   	<url-pattern>/reporting</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>truncatedb</servlet-name>
+  	<servlet-class>edu.drexel.info613.moviedatasite.servlet.TruncateDBServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>truncatedb</servlet-name>
+  	<url-pattern>/truncatedb</url-pattern>
+  </servlet-mapping>
 
 </web-app>
