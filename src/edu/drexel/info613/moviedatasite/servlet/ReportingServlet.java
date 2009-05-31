@@ -1,12 +1,16 @@
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package edu.drexel.info613.moviedatasite.servlet;
+
 import edu.drexel.info613.moviedatasite.db.MovieDB;
 import edu.drexel.info613.moviedatasite.domain.Director;
 import edu.drexel.info613.moviedatasite.domain.Actor;
-import java.util.LinkedList;
+
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class for Servlet: ReportingServlet
