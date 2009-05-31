@@ -7,7 +7,7 @@
 <title>Movie Data XML Upload</title>
 </head>
 <body>
-<form action="DataUploadServlet" enctype="multipart/form-data" method="post">
+<form action="dataupload" enctype="multipart/form-data" method="post">
 <p>
 Please specify a file, or a set of files:
 

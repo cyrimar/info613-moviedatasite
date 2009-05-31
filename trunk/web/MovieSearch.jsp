@@ -14,7 +14,7 @@ document.search.reset();
 <title>Movie Search</title>
 </head>
 <body>
-<form name="search" action="ReportingServlet" method="POST" style="height: 136px">
+<form name="search" action="reporting" method="POST" style="height: 136px">
          <center><h1>Search Movies</h1></center> 
          <center><input type="radio" name="radios" value="director" checked>Director</center>
           	<center><center style="width: 50 px"><input type="radio" name="radios" value="actor">Actor/Actress</center>
