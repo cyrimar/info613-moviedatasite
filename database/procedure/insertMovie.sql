@@ -2,8 +2,8 @@
 /* File Name: Distribute Movie Object Data into Relational
  * Tables*/
 /* Date: May 23, 2009*/
-/* Overview: This stored proc shall shred xml data
- * to DB tables */ 
+/* Overview: This stored proc shall insert xml data
+ * to movie tbl */ 
 
 CREATE OR REPLACE PROCEDURE insertMovie 
 (movieTitle VARCHAR2,movieYear NUMBER)
@@ -11,76 +11,5 @@ IS
 BEGIN
 INSERT INTO MOVIE
 VALUES (movie_seq.nextval, movieTitle, movieYear);
-END;
-/
-CREATE OR REPLACE PROCEDURE insertActor 
-(actorFName VARCHAR2,actorLName VARCHAR2)
-IS
-cnt NUMBER;
-id NUMBER;
-movie_id NUMBER;
-BEGIN
-SELECT COUNT(*) INTO cnt from ACTOR 
-WHERE first_name = actorFName
-AND last_name = actorLName;
-SELECT MAX(movie_id) INTO movie_id from MOVIE;
-IF cnt > 0 THEN 
-SELECT actor_id into id from ACTOR 
-WHERE first_name = actorFName
-AND last_name = actorLName;
-INSERT INTO PLAYS
-VALUES(movie_id,id);
-ELSE
-INSERT INTO ACTOR
-VALUES (actor_seq.nextval, actorFName, actorLName);
-INSERT INTO PLAYS
-VALUES(movie_id,actor_seq.currval);
-END IF;
-END;
-/
-CREATE OR REPLACE PROCEDURE insertDirector 
-(directorName VARCHAR2)
-IS
-id NUMBER;
-cnt NUMBER;
-movie_id NUMBER;
-BEGIN
-SELECT COUNT(*) INTO cnt from DIRECTOR
-WHERE director_name = directorName;
-SELECT MAX(movie_id) INTO movie_id from MOVIE;
-IF cnt > 0 THEN 
-SELECT director_id INTO id FROM DIRECTOR 
-WHERE director_name = directorName;
-INSERT INTO MOVIE_DIRECTOR
-VALUES(movie_id,id);
-ELSE
-INSERT INTO DIRECTOR
-VALUES (director_seq.nextval, directorName);
-INSERT INTO MOVIE_DIRECTOR
-VALUES(movie_id,director_seq.currval);
-END IF;
-END;
-/
-CREATE OR REPLACE PROCEDURE insertGenre
-(genreName VARCHAR2)
-IS
-id NUMBER;
-cnt NUMBER;
-movie_id NUMBER;
-BEGIN
-SELECT COUNT(*) INTO cnt from GENRE
-WHERE genre_name = genreName;
-SELECT MAX(movie_id) INTO movie_id from MOVIE;
-IF cnt > 0 THEN 
-SELECT genre_id INTO id FROM GENRE 
-WHERE genre_name = genreName;
-INSERT INTO MOVIE_GENRE
-VALUES(movie_id,id);
-ELSE
-INSERT INTO GENRE 
-VALUES (genre_seq.nextval,genreName);
-INSERT INTO MOVIE_GENRE
-VALUES(movie_id,genre_seq.currval);
-END IF;
 END;
 /
