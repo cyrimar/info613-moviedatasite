@@ -7,11 +7,16 @@
 <title>Movie Data XML Upload</title>
 </head>
 <body>
+<table bgcolor="#D8D8E8" align="center">
+<tr><th><h1>INFO 613 Movie Data Website<h1></th></tr>
+</table>
+<hr/>
+<p><a href="Index.html">Home Page</a></p>
 <p>
 IMPORTANT INSTRUCTIONS: There are two ways to upload files to the database. You can either upload a single
 .xml file or a .zip file containing .xml files. The upload includes validation against a DTD. Therefore, if
 your .xml files reference the movie.dtd it needs to be a reference to a publicly accesible location on the
-web (http://www.somesite.com/movies.dtd) or to a location within the uploaded zip file (movies.dtd is include
+web (http://www.somesite.com/movies.dtd) or to a location within the uploaded zip file (movies.dtd is included
 in zip upload).</p>
 <p>
  In other words, if you upload a single .xml file the upload will fail if it does not reference
