@@ -10,18 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * This servlet is responsible for handling requests to truncate the database - a.k.a. delete the data
- * from the database tables.
- * 
+/*
+ * This servlet is responsible for handling requests to truncate the database - a.k.a. delete the
+ * data from the database tables.
  * @author Patrick Freestone, Batuhan Yukselen
- *
  */
 public class TruncateDBServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1;
-    
-    private static final String HTML_STREAM_BEGIN = "<html><head><title>Truncate DB Results</title></head><body><p><a href=\"Index.html\">Home Page</a></p>";
+    private static final long   serialVersionUID  = 1;
+
+    private static final String HTML_STREAM_BEGIN = "<html><head><title>Truncate DB Results</title></head><body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p>";
     private static final String HTML_STREAM_END   = "</body></html>";
 
     /**
@@ -52,7 +50,7 @@ public class TruncateDBServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         processRequest(request, response);
     }
-    
+
     /**
      * Method responsible for writing the DB Truncation Result page.
      * 
