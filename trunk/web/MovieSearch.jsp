@@ -14,8 +14,13 @@ document.search.reset();
 <title>Movie Search</title>
 </head>
 <body>
+<table bgcolor="#D8D8E8" align="center">
+<tr><th><h1>INFO 613 Movie Data Website<h1></th></tr>
+</table>
+<hr/>
+<p><a href="Index.html">Home Page</a></p>
 <form name="search" action="reporting" method="POST" style="height: 136px">
-         <center><h1>Search Movies</h1></center> 
+         <center><h2>Search Movies</h2></center> 
          <center><input type="radio" name="radios" value="director" checked>Director</center>
           	<center><center style="width: 50 px"><input type="radio" name="radios" value="actor">Actor/Actress</center>
              </center>  
