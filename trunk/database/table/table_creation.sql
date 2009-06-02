@@ -68,11 +68,11 @@ CREATE TABLE movie_genre (
 
 --The purpose of this table is to provide a centralized location
 --for getting IDs for the tables, in bulk if necessary. 
-CREATE TABLE sequence (
+/*CREATE TABLE sequence (
 	table_name	varchar2(50)	NOT NULL,
 	next_id		numeric(10)		NOT NULL,
 	CONSTRAINT sequence_pk PRIMARY KEY (table_name)
-);
+);*/
 
 --Auto-increment id-numbers
 CREATE sequence movie_seq 
