@@ -34,7 +34,7 @@ public class ReportingServlet extends javax.servlet.http.HttpServlet implements 
     //instantiate database object
     MovieDB              database                = MovieDB.getInstance();
     LinkedList<String[]> outputList              = null;
-    final String         HTML_STREAM_BEGIN       = "<html><head><title>Search Results</title></head>" + "<body><center><table border=3><tr><th> Movie Title </th><th> Movie Genre </th></tr>";
+    final String         HTML_STREAM_BEGIN       = "<html><head><title>Search Results</title></head>" + "<body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p><center><table border=3><tr><th> Movie Title </th><th> Movie Genre </th></tr>";
     final String         HTML_STREAM_END         = "</center></body></html>";
     final String         HTML_USER_ENTRY_INVALID = "One of your inputs is invalid. You must enter" + " at least " + MIN_TEXT_SIZE + " but no more than " + MAX_TEXT_SIZE + " characters "
                                                          + "and include only alphabetical characters";

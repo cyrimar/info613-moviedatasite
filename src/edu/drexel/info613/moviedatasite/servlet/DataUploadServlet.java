@@ -43,7 +43,7 @@ public class DataUploadServlet extends HttpServlet {
     private static final int    ZIP_BUFFER        = 2048;
     private static final long   serialVersionUID  = 1;
 
-    private static final String HTML_STREAM_BEGIN = "<html><head><title>Upload Results</title></head><body>";
+    private static final String HTML_STREAM_BEGIN = "<html><head><title>Upload Results</title></head><body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p>";
     private static final String HTML_STREAM_END   = "</body></html>";
 
     /**
@@ -233,7 +233,11 @@ public class DataUploadServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print(HTML_STREAM_BEGIN);
 
+            out.print("<p>This page provides information on the success and failure of the conversion of xml files to");
+            out.print("domain objects and the writing of those domain objects to the database.</p>");
+            
             out.print("<h2>Successfully Uploaded Files</h2>");
+            out.print("<p>This section lists all xml files that were successfully converted to domain objects</p>");
             out.print("<p>Count: " + xmlResult.getSuccessfulFiles().size() + "</p>");
             out.print("<p>Files: ");
             for (File file : xmlResult.getSuccessfulFiles()) {
@@ -242,8 +246,10 @@ public class DataUploadServlet extends HttpServlet {
             out.print("</p><br/>");
 
             out.print("<h2>File Upload Failures</h2>");
-            out.print("<table><tr><th>File Name</th><th>Error</th></tr>");
+            out.print("<p>This section lists all xml files that failed to be converted and the error associated with the failure.</p>");
+            out.print("Count: " + xmlResult.getFailedFiles().size());
             Iterator<Map.Entry<File, String>> it = xmlResult.getFailedFiles().entrySet().iterator();
+            out.print("<table border=\"3\"><tr><th>File Name</th><th>Error</th></tr>");
             while (it.hasNext()) {
                 Map.Entry<File, String> failedFile = (Map.Entry<File, String>)it.next();
                 out.print("<tr><td>" + failedFile.getKey() + "</td><td>" + failedFile.getValue() + "</td></tr>");
@@ -251,6 +257,7 @@ public class DataUploadServlet extends HttpServlet {
             out.print("</table><br/>");
 
             out.print("<h2>DB Write Result</h2>");
+            out.print("<p>This section reports if the successfully uploaded files were written to the DB. If they failed, the error message is provided.");
             if (dbResult.isSuccess()) {
                 out.print("<p>Success!</p>");
             } else {
