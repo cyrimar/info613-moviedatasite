@@ -12,15 +12,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class for Servlet: ReportingServlet
- * This class is called from movieSearch jsp and 
- * Responsible for taking the information provided by the user,
- * Changing it to a domain object, passing that domain object to 
- * the MovieDB to obtain the results, and generate html (Movie objects), 
- * to display output. doGet() and doPost() forward to processRequest().
+/*
+ * Servlet implementation class for Servlet: ReportingServlet This class is called from movieSearch
+ * jsp and Responsible for taking the information provided by the user, Changing it to a domain
+ * object, passing that domain object to the MovieDB to obtain the results, and generate html (Movie
+ * objects), to display output. doGet() and doPost() forward to processRequest().
  * @author Patrick Freestone, Batuhan Yukselen
- *
  */
 public class ReportingServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 
@@ -34,11 +31,11 @@ public class ReportingServlet extends javax.servlet.http.HttpServlet implements 
     //instantiate database object
     MovieDB              database                = MovieDB.getInstance();
     LinkedList<String[]> outputList              = null;
-    final String         HTML_STREAM_BEGIN       = "<html><head><title>Search Results</title></head>" + "<body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p><center><table border=3><tr><th> Movie Title </th><th> Movie Genre </th></tr>";
+    final String         HTML_STREAM_BEGIN       = "<html><head><title>Search Results</title></head><body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p><center><table border=3><tr><th> Movie Title </th><th> Movie Genre </th></tr>";
     final String         HTML_STREAM_END         = "</center></body></html>";
     final String         HTML_USER_ENTRY_INVALID = "One of your inputs is invalid. You must enter" + " at least " + MIN_TEXT_SIZE + " but no more than " + MAX_TEXT_SIZE + " characters "
                                                          + "and include only alphabetical characters";
-    final String         HTML_NO_SEARCH_FOUND    = "No Search Results Found...";
+    final String         HTML_NO_SEARCH_FOUND    = "<html><head><title>Search Results</title></head><body><table bgcolor=\"#D8D8E8\" align=\"center\"><tr><th><h1>INFO 613 Movie Data Website<h1></th></tr></table><hr/><p><a href=\"Index.html\">Home Page</a></p><p>No Search Results Found...</p></body></html>";
 
     PrintWriter          out                     = null;
 
